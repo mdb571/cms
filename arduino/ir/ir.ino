@@ -15,12 +15,14 @@ if(!digitalRead(in)&& prev_state)
   { 
     temp++;
     Serial.print(temp);
+    Serial.print("\n");
     delay(1000);
   }
 else if(!digitalRead(out)&& prev_state)
   { 
     --temp;
     Serial.print(temp);
+    Serial.print("\n");
     delay(200);
   }
  if (digitalRead(in)){

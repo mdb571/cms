@@ -20,6 +20,7 @@ def get_data():
     prev_count=0
     while True:
         read_ser=int(ser.readline().decode("utf-8"))
+        print(read_ser)
         if read_ser>5:
             send_msg()
         if read_ser!=prev_count:
