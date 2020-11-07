@@ -53,7 +53,7 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
     <script>
-        const url ="https://my2ujg.deta.dev/update";
+        const url ="https://api.thingspeak.com/channels/1223014/fields/1.json?results=1";
         function LiveUpdate(){
             const count = document.getElementById('count');
             const alert= document.getElementById('alert');
@@ -69,7 +69,7 @@
                 fetch(url)
                 .then((resp) => resp.json())
                 .then(function(data){
-                    count.textContent=data.count;
+                    count.textContent=data.feeds[0].field1;
                     console.log(count.textContent)
                     if (Number(count.textContent)>5){
                         alert.textContent="There are too much people in your room.!"
