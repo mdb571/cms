@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from flask import make_response,redirect,render_template
-
+from flask_cors import CORS 
 app = Flask(__name__)
-
+cors=CORS(app)
 data=0
 
 if __name__ == '__main__':
@@ -20,3 +20,8 @@ def update_sensor_data(value):
     global data
     data=value
     return("Sensor value updated")
+
+@app.after_request
+def apply_caching(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
