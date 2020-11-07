@@ -71,7 +71,7 @@
                 .then(function(data){
                     count.textContent=data.count;
                     console.log(count.textContent)
-                    if (num(count.textContent)>5){
+                    if (Number(count.textContent)>5){
                         alert.textContent="There are too much people in your room.!"
                     }
 
