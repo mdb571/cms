@@ -14,7 +14,7 @@ client = Client(ACCOUNT_SID,AUTH_TOKEN)
 
 
 
-ser=serial.Serial("/dev/ttyUSB0",9600)  
+ser=serial.Serial("/dev/ttyUSB1",9600)  
 
 def get_data():
     prev_count=0
@@ -23,8 +23,11 @@ def get_data():
         print(read_ser)
         if read_ser>5:
             send_msg()
+            prev_count=0
         if read_ser!=prev_count:
+
             requests.get('https://api.thingspeak.com/update?api_key={}&field1='.format(os.environ.get(THINGAPI)+read_ser)
+
             prev_count=read_ser
         
         
@@ -37,3 +40,5 @@ def send_msg():
                         from_=os.environ.get('FROM'), #use your twilio no here
                         to=os.environ.get('TO'), #use your verified phone no. here
                     )
+    
+get_data()
