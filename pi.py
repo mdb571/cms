@@ -14,16 +14,18 @@ client = Client(ACCOUNT_SID,AUTH_TOKEN)
 
 
 
-ser=serial.Serial("/dev/ttyUSB0",9600)  
+ser=serial.Serial("/dev/ttyUSB1",9600)  
 
 def get_data():
     prev_count=0
     while True:
         read_ser=int(ser.readline().decode("utf-8"))
+        print(read_ser)
         if read_ser>5:
             send_msg()
+            prev_count=0
         if read_ser!=prev_count:
-            requests.post('https://my2ujg.deta.dev/update/'+read_ser)
+            requests.post('https://my2ujg.deta.dev/update/'+str(read_ser))
             prev_count=read_ser
         
         
@@ -36,3 +38,5 @@ def send_msg():
                         from_=os.environ.get('FROM'), #use your twilio no here
                         to=os.environ.get('TO'), #use your verified phone no. here
                     )
+    
+get_data()
