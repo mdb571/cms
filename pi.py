@@ -25,7 +25,9 @@ def get_data():
             send_msg()
             prev_count=0
         if read_ser!=prev_count:
-            requests.post('https://my2ujg.deta.dev/update/'+str(read_ser))
+
+            requests.get('https://api.thingspeak.com/update?api_key={}&field1='.format(os.environ.get(THINGAPI)+read_ser)
+
             prev_count=read_ser
         
         
